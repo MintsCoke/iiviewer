@@ -473,9 +473,14 @@ function encodePageNumber(number) {
     }
 }
 
+function encodePageTotal(number) {
+    return number - 2;
+}
+
+
 PDFJS.getDocument(url).then(function (pdfDoc_) {
     pdfDoc = pdfDoc_;
-    document.getElementById('page_count').textContent = pdfDoc.numPages;
+    document.getElementById('page_count').textContent = encodePageTotal(pdfDoc.numPages);
     renderPage(pageNum);
 
     for (var i = 0; i < pdfDoc.numPages; i++) {
