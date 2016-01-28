@@ -1,0 +1,236 @@
+header-height = 70px
+footer-height = 50px
+page-margin = 20px
+item-padding = 10px
+icon-size = 1.5em
+
+html
+    width 100%
+
+body
+    width 100%
+    color #efefef
+    font-size 14px
+    a
+        color #eee
+
+header
+    height header-height
+    position fixed
+    width 100%
+    background-color rgba(20, 20, 20, 0.5)
+    line-height header-height
+    h1
+        background-color rgba(20, 20, 20, 0.5)
+        float left
+        width 180px
+        height 100%
+        margin 0px
+        text-align center
+    nav
+        float left
+        padding-left page-margin
+        #prev, #next
+            font-size 3.5em
+            text-shadow 0 0 30px rgba(0,0,0,0.4)
+            position fixed
+            top 50vh
+            cursor pointer
+        #prev
+            left 50px
+        #next
+            right 50px
+        #view-contents, #first, #last, #favourite
+            vertical-align middle
+            font-size icon-size
+            padding-right item-padding
+            cursor pointer
+        #page_num
+            background-color rgba(20, 20, 20, 0.5)
+            border 0px
+            -webkit-border-radius 5px
+            border-radius 5px
+            padding 5px
+            width 30px
+            text-align center
+        #page_count
+            padding-right item-padding
+    ul#controls
+        padding-left 0px
+        margin 0px
+        list-style-type none
+        float right
+        padding-right page-margin
+        li
+            display inline-block
+            margin-right item-padding
+            font-size icon-size
+            a
+                cursor pointer
+
+
+aside#contents, aside#search, aside#download, aside#share
+    display none
+    position fixed
+    width 250px + page-margin
+    background-color #111
+    top header-height
+    bottom footer-height
+    border-bottom 1px solid #333
+    padding-top page-margin
+    padding-left page-margin
+    padding-right page-margin
+
+#contents-list, #contents-thumbnail, #search-results
+    clear both
+    padding-top item-padding
+    overflow-y scroll
+    position fixed
+    top header-height + 50px
+    bottom footer-height + page-margin
+    width 265px
+#contents-list::-webkit-scrollbar, #contents-thumbnail::-webkit-scrollbar, #search-results::-webkit-scrollbar
+    width 5px
+    background-color #333
+    -webkit-border-radius 5px
+    border-radius 5px
+#contents-list::-webkit-scrollbar-thumb, #contents-thumbnail::-webkit-scrollbar-thumb, #search-results::-webkit-scrollbar-thumb
+    background-color #555
+    -webkit-border-radius 5px
+    border-radius 5px
+
+aside#contents
+    #contents-header
+        font-size icon-size
+        float left
+        padding-right item-padding
+        a
+            cursor pointer
+            vertical-align middle
+    h2
+        float left
+        margin 0px
+    #contents-list
+        display none
+        a
+            cursor pointer
+    #contents-thumbnail
+        #thumbnails-template
+            display none
+        #thumbnails
+            padding-left 0px
+            list-style-type none
+            margin 0px
+            li
+                text-align center
+                padding-bottom item-padding
+                a
+                    cursor pointer
+
+aside#search
+    right 0px
+    #search-query
+        border 0px
+        -webkit-border-radius 5px
+        border-radius 5px
+        padding 5px
+        width 180px
+        background-color #333
+    #search-find, #search-prev, #search-next
+        padding-left item-padding
+        cursor pointer
+    #search-result-template
+        display none
+    #search-results
+        padding-left 0px
+        list-style-type none
+        margin 0px
+        #search-item-current
+            background-color #222
+        li
+            clear both
+            border-bottom 1px solid #333
+            padding-top item-padding
+            padding-bottom item-padding
+            overflow hidden
+            a
+                cursor pointer
+                img
+                    float left
+                    width 100px
+                .search-details
+                    padding-left item-padding
+                    float left
+                    width 150px
+                    h3
+                        margin 0px
+                    .search-highlight
+                        background-color #333
+                        font-weight bold
+                        padding 2px
+                        -webkit-border-radius 5px
+                        border-radius 5px
+
+aside#download, aside#share
+    right 0px
+    bottom auto
+    h2
+        margin 0px
+    a
+        text-decoration underline
+    ol
+        li
+            input
+                float right
+
+article
+    display table
+    width 100%
+    height 100vh
+    background-color #ddd
+    #single-page
+        display table-cell
+        vertical-align middle
+        text-align center
+    #single-canvas, #left-canvas, #right-canvas
+        background-color #ccc
+        -webkit-box-shadow 0 0 20px 0 rgba(0,0,0,0.3)
+        box-shadow 0 0 20px 0 rgba(0,0,0,0.3)
+    #double-page
+        display none
+        vertical-align middle
+        text-align center
+        canvas
+            display inline-block
+
+footer
+    height footer-height
+    position fixed
+    bottom 0px
+    width 100%
+    background-color #121212
+    line-height footer-height
+    nav
+        ul
+            margin 0px
+            padding-left 0px
+            list-style-type none
+            li
+                padding-right page-margin
+                border-left 1px solid #000
+                border-right 1px solid #343434
+                padding-left page-margin
+                float left
+            li:first-of-type
+                border-left 0px
+            li:last-of-type
+                border-right 0px
+    div
+        float right
+        padding-right page-margin
+
+.tooltip
+    background-color #333 !important
+    border 0px !important
+    -webkit-border-radius 5px
+    border-radius 5px

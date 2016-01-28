@@ -1,0 +1,7 @@
+*.swp
+*.swo
+*~
+src/pdf/*.png
+src/pdf/*.txt
+src/pdf/1*.pdf
+src/node_modules

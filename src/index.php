@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Foobar</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header>
+            <h1>Foobar</h1>
+            <nav>
+                <a id="prev" class="fa fa-chevron-left"></a>
+                <a id="next" class="fa fa-chevron-right"></a>
+                <a id="view-contents" class="fa fa-columns" data-tooltip="Navigate" data-tooltip-positions="bottom"></a>
+                <a id="first" class="fa fa-chevron-circle-left" data-tooltip="First page" data-tooltip-positions="bottom"></a>
+                <input type="text" id="page_num"> / <span id="page_count"></span>
+                <a id="last" class="fa fa-chevron-circle-right" data-tooltip="Last page" data-tooltip-positions="bottom"></a>
+                <a id="favourite" class="fa fa-star-o" data-tooltip="Toggle favourite" data-tooltip-positions="bottom"></a>
+            </nav>
+            <ul id="controls">
+                <li><a id="view-single" class="fa fa-file-o" data-tooltip="Single page" data-tooltip-positions="bottom"></a></li>
+                <li><a id="view-double" class="fa fa-copy" data-tooltip="Double pgae" data-tooltip-positions="bottom"></a></li>
+                <li><a id="zoom-in" class="fa fa-plus-circle" data-tooltip="Zoom in" data-tooltip-positions="bottom"></a></li>
+                <li><a id="zoom-out" class="fa fa-minus-circle" data-tooltip="Zoom out" data-tooltip-positions="bottom"></a></li>
+                <li><a id="view-search" class="fa fa-search" data-tooltip="Search" data-tooltip-positions="bottom"></a></li>
+                <li><a id="view-download" class="fa fa-cloud-download" data-tooltip="Download centre" data-tooltip-positions="bottom"></a></li>
+                <li><a id="view-share" class="fa fa-share-alt" data-tooltip="Share" data-tooltip-positions="bottom"></a></li>
+            </ul>
+        </header>
+        <aside id="contents">
+            <div id="contents-header">
+                <a id="view-list" class="fa fa-th-list"></a>
+                <a id="view-thumbnail" class="fa fa-th-large"></a>
+            </div>
+            <h2 id="contents-title" data-list-title="Table of Contents" data-thumbnail-title="Thumbnails">Thumbnails</h2>
+            <div id="contents-list">
+                <ol>
+                    <li><a class="view-page" data-page-number="1">Section A</a></li>
+                    <li><a class="view-page" data-page-number="3">Section B</a></li>
+                    <li><a class="view-page" data-page-number="5">Section C</a></li>
+                </ol>
+            </div>
+            <div id="contents-thumbnail">
+                <div id="thumbnails-template">
+                    <a class="view-page" data-page-number="{{page_number}}">
+                        <img src="pdf/{{thumbnail_file}}" alt="Page {{page_number}}">
+                    </a>
+                    <br>
+                    Page {{page_number}}
+                </div>
+                <ol id="thumbnails"></ol>
+            </div>
+        </aside>
+        <article>
+            <div id="single-page">
+                <canvas id="single-canvas"></canvas>
+            </div>
+            <div id="double-page">
+                <canvas id="left-canvas"></canvas>
+                <canvas id="right-canvas"></canvas>
+            </div>
+        </article>
+        <aside id="search">
+            <input type="text" id="search-query" placeholder="Search">
+            <a id="search-find" class="fa fa-search"></a>
+            <a id="search-prev" class="fa fa-chevron-left"></a>
+            <a id="search-next" class="fa fa-chevron-right"></a>
+            <div id="search-result-template">
+                <a class="view-page" data-page-number="{{page_number}}">
+                    <img src="pdf/{{thumbnail_file}}" alt="Page {{page_number}}">
+                    <span class="search-details">
+                        <h3>Page {{page_number}}</h3>
+                        <p>{{snippet}}</p>
+                    </span>
+                </a>
+            </div>
+            <ol id="search-results">
+            </ol>
+        </aside>
+        <aside id="download">
+            <h2>Download Centre</h2>
+            <p>
+                <a class="fa fa-book" href="pdf/view.pdf" target="_blank" download> Full PDF</a>
+            </p>
+            <p>
+                <a class="fa fa-star" id="download-favourite"> Favourite pages (<span id="favourite-number">0</span>)</a>
+            </p>
+            <p>
+                <a class="fa fa-list-ul" id="download-section"> Sections (<span id="section-number">0</span>)</a>
+            </p>
+            <ol>
+                <li>Section A<input class="download-section" type="checkbox" name="section" value="1,2,3,"></li>
+                <li>Section B<input class="download-section" type="checkbox" name="section" value="4,"></li>
+                <li>Section C<input class="download-section" type="checkbox" name="section" value="5,6,"></li>
+            </ol>
+        </aside>
+        <aside id="share">
+            <h2>Share</h2>
+            <p>
+                <a class="fa fa-envelope"> Email</a>
+            </p>
+            <p>
+                <a class="fa fa-twitter"> Twitter</a>
+            </p>
+            <p>
+                <a class="fa fa-linkedin"> LinkedIn</a>
+            </p>
+            <p>
+                <a class="fa fa-facebook"> Facebook</a>
+            </p>
+        </aside>
+        <footer>
+            <nav>
+                <ul>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                </ul>
+            </nav>
+            <div id="copyright">
+                &copy; Interactive Investor
+            </div>
+        </footer>
+
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
