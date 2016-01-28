@@ -10,7 +10,12 @@ PDF viewer for Interactive Investor.
 
 ## Additional dependencies
 
+Build-time:
+
  1. `imagemagick` (specifically `convert` and `mogrify`)
  2. `pdftotext` (part of `poppler`)
  3. `awk`
- 4. `pdftk`
+
+Run-time:
+
+ 1. `pdftk`

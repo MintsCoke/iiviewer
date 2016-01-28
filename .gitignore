@@ -4,4 +4,6 @@
 src/pdf/*.png
 src/pdf/*.txt
 src/pdf/1*.pdf
+src/css/*.css
+src/js/*.js
 src/node_modules

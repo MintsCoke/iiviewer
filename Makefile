@@ -13,3 +13,4 @@ pdf :
 	cd src/pdf && mogrify -resize 250x250 *.png
 	cd src/pdf && pdftotext view.pdf
 	cd src/pdf && awk '/^\014/{sub("\014","NEWPAGE\n")}1' view.txt > search.txt
+	cd src/pdf && rm view.txt
