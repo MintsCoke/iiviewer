@@ -69,7 +69,7 @@ function onSearchFind() {
             searchResults.push({
                 pageNumber: searchPage,
                 snippet: searchSnippet,
-                thumbnailFile: 'thumbnail-' + String(searchPage-1) + '.png'
+                thumbnailFile: 'thumbnail-' + String(searchPage) + '.png'
             });
         }
 

@@ -207,7 +207,7 @@ PDFJS.getDocument(url).then(function (pdfDoc_) {
         li.innerHTML = document.getElementById('thumbnails-template').innerHTML
             .replace(/{{page_name}}/g, String(encodePageNumber(i+1)))
             .replace(/{{page_number}}/g, String(i+1))
-            .replace('{{thumbnail_file}}', 'thumbnail-' + String(i) + '.png');
+            .replace('{{thumbnail_file}}', 'thumbnail-' + String(i+1) + '.png');
         document.getElementById('thumbnails').appendChild(li);
     }
 
