@@ -25,7 +25,16 @@ gulp.task('js', function() {
         'node_modules/pdfjs-dist/build/pdf.combined.js',
         'node_modules/tooltip/dist/Tooltip.js',
         'bower_components/dragscroll/dragscroll.js',
-        'js/source/custom.js',
+        'js/source/annotations.js',
+        'js/source/download.js',
+        'js/source/favourite.js',
+        'js/source/navigate.js',
+        'js/source/page-numbering.js',
+        'js/source/search.js',
+        'js/source/view.js',
+        'js/source/zoom.js',
+        'js/source/render.js',
+        'js/source/tooltip.js',
     ]).pipe(concat('main.js')).pipe(gulp.dest('./js/'));
 });
 
