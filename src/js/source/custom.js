@@ -12,7 +12,11 @@ var pdfDoc = null,
         isViewList = false,
         favouritePages = [],
         checkedSectionsNum = 0,
-        scale = 0.8,
+        scale = null,
+        scaleShrink = 0.9,
+        templateHeightPx = 120,
+        browserWidth = window.innerWidth || document.body.clientWidth,
+        browserHeight = (window.innerHeight || document.body.clientHeight) - templateHeightPx,
         canvas = document.getElementById('single-canvas'),
         ctx = canvas.getContext('2d'),
         leftCanvas = document.getElementById('left-canvas'),
@@ -25,6 +29,12 @@ function renderPage(num) {
     ga('send', 'pageview');
     pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
+        if ( ! scale) {
+            scale = calculateScaleToFit(page);
+        } else {
+            resizeArticleElementToFitPages(page);
+        }
+
         if (isViewDouble) {
             var viewport = page.getViewport(scale);
             leftCanvas.height = viewport.height;
@@ -92,6 +102,45 @@ function renderPage(num) {
         document.getElementById('favourite').className = 'fa fa-star';
     } else {
         document.getElementById('favourite').className = 'fa fa-star-o';
+    }
+}
+
+function calculateScaleToFit(page) {
+    var fullSizeViewport = page.getViewport(1);
+    var scaleWidth = browserWidth / fullSizeViewport.width * scaleShrink;
+    var scaleHeight = browserHeight / fullSizeViewport.height * scaleShrink;
+    if (scaleWidth < scaleHeight) {
+        return scaleWidth;
+    }
+    return scaleHeight;
+}
+
+function resizeArticleElementToFitPages(page) {
+    var pagesElement = document.getElementById('pages');
+    var viewport = page.getViewport(scale);
+    var viewportPaddingMultiplier = 1.1;
+    var totalViewportHeight = (viewport.height + templateHeightPx) * viewportPaddingMultiplier;
+    if (isViewDouble) {
+        var totalViewportWidth = viewport.width * 2 * viewportPaddingMultiplier;
+    } else {
+        var totalViewportWidth = viewport.width * viewportPaddingMultiplier;
+    }
+
+    pagesElement.setAttribute('style', '');
+    if (totalViewportWidth > browserWidth) {
+        pagesElement.setAttribute('style', 'width: ' + totalViewportWidth + 'px;');
+        pagesElement.style.width = totalViewportWidth + 'px';
+    } else {
+        pagesElement.setAttribute('style', 'width: 100%');
+        pagesElement.style.width = '100%';
+    }
+
+    if (totalViewportHeight > (browserHeight + templateHeightPx)) {
+        pagesElement.setAttribute('style', pagesElement.getAttribute('style') + 'height: ' + totalViewportHeight +  + 'px;');
+        pagesElement.style.height = totalViewportHeight + 'px';
+    } else {
+        pagesElement.setAttribute('style', 'height: 100vh');
+        pagesElement.style.height = '100vh';
     }
 }
 
