@@ -31,7 +31,11 @@ function renderPage(num) {
     pageRendering = true;
 
     if (isViewDouble) {
-        var leftPageNumber = Math.floor(num / 2) * 2;
+        if (hasLeadingPage) {
+            var leftPageNumber = Math.floor(num / 2) * 2;
+        } else {
+            var leftPageNumber = (Math.floor((num - 1) / 2) * 2) + 1;
+        }
         var rightPageNumber = leftPageNumber+1;
 
         if (leftPageNumber > 0) {
