@@ -12,9 +12,10 @@ PDF viewer for Interactive Investor.
 
 Build-time:
 
- 1. `imagemagick` (specifically `convert` and `mogrify`)
- 2. `pdftotext` (part of `poppler`)
- 3. `awk`
+ 1. `gs`
+ 2. `mogrify` (part of `imagemagick`)
+ 3. `pdftotext` (part of `poppler`)
+ 4. `awk`
 
 Run-time:
 
