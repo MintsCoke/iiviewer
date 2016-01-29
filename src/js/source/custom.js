@@ -395,7 +395,7 @@ function downloadPages(pages) {
         var downloadFile = client.responseText;
         ga('set', 'page', '/download-' + pages);
         ga('send', 'pageview');
-        window.open('./pdf/' + downloadFile)
+        window.open('./pdf/' + downloadFile, '_self')
     }
     client.send();
 }
