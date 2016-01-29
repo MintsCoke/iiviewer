@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="js/modernizr.js"></script>
     </head>
-    <body class="dragscroll">
+    <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -61,18 +61,20 @@
                 <ol id="thumbnails"></ol>
             </div>
         </aside>
-        <article id="pages">
-            <div id="single-page">
-                <canvas id="single-canvas"></canvas>
-                <div id="annotation-layer"></div>
-            </div>
-            <div id="double-page">
-                <canvas id="left-canvas"></canvas>
-                <canvas id="right-canvas"></canvas>
-                <div id="left-annotation-layer"></div>
-                <div id="right-annotation-layer"></div>
-            </div>
-        </article>
+        <div id="pages-wrapper" class="dragscroll">
+            <article id="pages">
+                <div id="single-page">
+                    <canvas id="single-canvas"></canvas>
+                    <div id="annotation-layer"></div>
+                </div>
+                <div id="double-page">
+                    <canvas id="left-canvas"></canvas>
+                    <canvas id="right-canvas"></canvas>
+                    <div id="left-annotation-layer"></div>
+                    <div id="right-annotation-layer"></div>
+                </div>
+            </article>
+        </div>
         <aside id="search">
             <input type="text" id="search-query" placeholder="Search">
             <a id="search-find" class="fa fa-search"></a>
