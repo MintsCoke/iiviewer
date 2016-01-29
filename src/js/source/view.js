@@ -1,8 +1,8 @@
 function onViewContents() {
     if (isViewContents) {
-        document.getElementById('contents').style.display = 'none';
+        document.getElementById('contents').style.left = '-350px';
     } else {
-        document.getElementById('contents').style.display = 'block';
+        document.getElementById('contents').style.left = '0px';
     }
     isViewContents = ! isViewContents;
 }
@@ -71,7 +71,7 @@ function onViewShare() {
 document.getElementById('view-share').addEventListener('click', onViewShare);
 
 function toggleRightPanel(name) {
-    document.getElementById('search').style.display = 'none';
+    document.getElementById('search').style.right = '-350px';
     document.getElementById('download').style.display = 'none';
     document.getElementById('share').style.display = 'none';
     if (name === 'search') {
@@ -79,7 +79,7 @@ function toggleRightPanel(name) {
         isViewDownload = false;
         isViewShare = false;
         if (isViewSearch) {
-            document.getElementById('search').style.display = 'block';
+            document.getElementById('search').style.right = '0px';
         }
     } else if (name === 'download') {
         isViewSearch = false;

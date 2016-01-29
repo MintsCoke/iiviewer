@@ -70,8 +70,11 @@ header
                 cursor pointer
 
 
+aside#contents
+    left -350px
+
 aside#contents, aside#search, aside#download, aside#share
-    display none
+    transition all 0.5s cubic-bezier(.1,.79,.55,.99) 0s;
     position fixed
     width 250px + page-margin
     background-color #111
@@ -129,7 +132,7 @@ aside#contents
                     cursor pointer
 
 aside#search
-    right 0px
+    right -350px
     #search-query
         border 0px
         -webkit-border-radius 5px
@@ -173,6 +176,7 @@ aside#search
                         border-radius 5px
 
 aside#download, aside#share
+    display none
     right 0px
     bottom auto
     h2
