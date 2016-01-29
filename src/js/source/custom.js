@@ -486,6 +486,7 @@ PDFJS.getDocument(url).then(function (pdfDoc_) {
     for (var i = 0; i < pdfDoc.numPages; i++) {
         var li = document.createElement('li');
         li.innerHTML = document.getElementById('thumbnails-template').innerHTML
+            .replace(/{{page_name}}/g, String(encodePageNumber(i+1)))
             .replace(/{{page_number}}/g, String(i+1))
             .replace('{{thumbnail_file}}', 'thumbnail-' + String(i) + '.png');
         document.getElementById('thumbnails').appendChild(li);
