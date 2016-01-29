@@ -1,6 +1,7 @@
 var url = './pdf/view.pdf';
 
 var pdfDoc = null,
+    hasLeadingPage = false,
     pageNum = 1,
     pageRendering = false,
     pageNumPending = null,
@@ -28,61 +29,94 @@ function renderPage(num) {
     ga('set', 'page', '/view-page-' + num);
     ga('send', 'pageview');
     pageRendering = true;
-    pdfDoc.getPage(num).then(function(page) {
-        if ( ! scale) {
-            scale = calculateScaleToFit(page);
-        } else {
-            resizeArticleElementToFitPages(page);
+
+    if (isViewDouble) {
+        var leftPageNumber = Math.floor(num / 2) * 2;
+        var rightPageNumber = leftPageNumber+1;
+
+        if (leftPageNumber > 0) {
+            pdfDoc.getPage(leftPageNumber).then(function(page) {
+                if ( ! scale) {
+                    scale = calculateScaleToFit(page);
+                } else {
+                    resizeArticleElementToFitPages(page);
+                }
+
+                var viewport = page.getViewport(scale);
+                leftCanvas.width = viewport.width;
+                leftCanvas.height = viewport.height;
+                if (rightPageNumber > pdfDoc.numPages) {
+                    rightCanvas.width = leftCanvas.width;
+                    rightCanvas.height = leftCanvas.height;
+                    rightCtx.clearRect(0, 0, rightCanvas.width, rightCanvas.height);
+                    rightCtx.textAlign = 'center';
+                    rightCtx.fillText('End of document', rightCanvas.width / 2, rightCanvas.height / 2);
+                    var annotationLayerDiv = document.getElementById('right-annotation-layer');
+                    while (annotationLayerDiv.firstChild) {
+                        annotationLayerDiv.removeChild(annotationLayerDiv.firstChild);
+                    }
+                }
+
+                var leftRenderTask = page.render({
+                    canvasContext: leftCtx, viewport: viewport
+                });
+
+                leftRenderTask.promise.then(function () {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                    setupAnnotations(page, viewport, leftCanvas, document.getElementById('left-annotation-layer'));
+                });
+            });
         }
 
-        if (isViewDouble) {
-            var viewport = page.getViewport(scale);
-            leftCanvas.height = viewport.height;
-            leftCanvas.width = viewport.width;
-
-            var leftRenderTask = page.render({
-                canvasContext: leftCtx, viewport: viewport
-            });
-
-            leftRenderTask.promise.then(function () {
-                pageRendering = false;
-                if (pageNumPending !== null) {
-                    renderPage(pageNumPending);
-                    pageNumPending = null;
+        if (rightPageNumber <= pdfDoc.numPages) {
+            pdfDoc.getPage(rightPageNumber).then(function(page) {
+                if ( ! scale) {
+                    scale = calculateScaleToFit(page);
+                } else {
+                    resizeArticleElementToFitPages(page);
                 }
-                setupAnnotations(page, viewport, leftCanvas, document.getElementById('left-annotation-layer'));
-            });
 
-            if (num+1 > pdfDoc.numPages) {
-                rightCanvas.height = leftCanvas.height;
-                rightCanvas.width = leftCanvas.width;
-                rightCtx.clearRect(0, 0, rightCanvas.width, rightCanvas.height);
-                rightCtx.textAlign = 'center';
-                rightCtx.fillText('End of document', rightCanvas.width / 2, rightCanvas.height / 2);
-                var annotationLayerDiv = document.getElementById('right-annotation-layer');
-                while (annotationLayerDiv.firstChild) {
-                    annotationLayerDiv.removeChild(annotationLayerDiv.firstChild);
+                var viewport = page.getViewport(scale);
+                rightCanvas.width = viewport.width;
+                rightCanvas.height = viewport.height;
+
+                if (leftPageNumber <= 0) {
+                    leftCanvas.width = rightCanvas.width;
+                    leftCanvas.height = rightCanvas.height;
+                    leftCtx.clearRect(0, 0, leftCanvas.width, leftCanvas.height);
+                    leftCtx.textAlign = 'center';
+                    leftCtx.fillText('Start of document', leftCanvas.width / 2, leftCanvas.height / 2);
+                    var annotationLayerDiv = document.getElementById('left-annotation-layer');
+                    while (annotationLayerDiv.firstChild) {
+                        annotationLayerDiv.removeChild(annotationLayerDiv.firstChild);
+                    }
                 }
-            } else {
-                pdfDoc.getPage(num+1).then(function(page) {
-                    rightCanvas.height = viewport.height;
-                    rightCanvas.width = viewport.width;
 
-                    var rightRenderTask = page.render({
-                        canvasContext: rightCtx, viewport: viewport
-                    });
-
-                    rightRenderTask.promise.then(function () {
-                        pageRendering = false;
-                        if (pageNumPending !== null) {
-                            renderPage(pageNumPending);
-                            pageNumPending = null;
-                        }
-                        setupAnnotations(page, viewport, rightCanvas, document.getElementById('right-annotation-layer'));
-                    });
+                var rightRenderTask = page.render({
+                    canvasContext: rightCtx, viewport: viewport
                 });
+
+                rightRenderTask.promise.then(function () {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                    setupAnnotations(page, viewport, rightCanvas, document.getElementById('right-annotation-layer'));
+                });
+            });
+        }
+    } else {
+        pdfDoc.getPage(num).then(function(page) {
+            if ( ! scale) {
+                scale = calculateScaleToFit(page);
+            } else {
+                resizeArticleElementToFitPages(page);
             }
-        } else {
             var viewport = page.getViewport(scale);
             canvas.height = viewport.height;
             canvas.width = viewport.width;
@@ -101,8 +135,8 @@ function renderPage(num) {
                 }
                 setupAnnotations(page, viewport, canvas, document.getElementById('annotation-layer'));
             });
-        }
-    });
+        });
+    }
 
     document.getElementById('page_num').value = encodePageNumber(pageNum);
     if (favouritePages.indexOf(pageNum) != -1) {
@@ -163,7 +197,11 @@ function onPrevPage() {
     if (pageNum <= 1) {
         return;
     }
-    pageNum--;
+    if (isViewDouble) {
+        pageNum -= 2;
+    } else {
+        pageNum--;
+    }
     queueRenderPage(pageNum);
 }
 document.getElementById('prev').addEventListener('click', onPrevPage);
@@ -172,7 +210,11 @@ function onNextPage() {
     if (pageNum >= pdfDoc.numPages) {
         return;
     }
-    pageNum++;
+    if (isViewDouble) {
+        pageNum += 2;
+    } else {
+        pageNum++;
+    }
     queueRenderPage(pageNum);
 }
 document.getElementById('next').addEventListener('click', onNextPage);
@@ -515,7 +557,7 @@ function decodePageNumber(number) {
     } else if (number == 'ii') {
         return 2;
     } else {
-        return number + 2;
+        return parseInt(number) + 2;
     }
 }
 
@@ -525,7 +567,7 @@ function encodePageNumber(number) {
     } else if (number == 2) {
         return 'ii';
     } else {
-        return number - 2;
+        return parseInt(number) - 2;
     }
 }
 
