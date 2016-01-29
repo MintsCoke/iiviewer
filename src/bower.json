@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "dragscroll": "~0.0.5"
+    "dragscroll": "~0.0.5",
+    "tether-tooltip": "~1.2.0"
   }
 }

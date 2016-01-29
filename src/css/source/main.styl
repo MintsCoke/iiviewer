@@ -29,45 +29,50 @@ header
         margin 0px
         text-align center
     nav
-        float left
-        padding-left page-margin
-        #prev, #next
-            font-size 3.5em
-            text-shadow 0 0 30px rgba(0,0,0,0.4)
-            position fixed
-            top 50vh
-            cursor pointer
-        #prev
-            left 50px
-        #next
-            right 50px
-        #view-contents, #first, #last, #favourite
-            vertical-align middle
-            font-size icon-size
-            padding-right item-padding
-            cursor pointer
-        #page_num
-            background-color rgba(20, 20, 20, 0.5)
-            border 0px
-            -webkit-border-radius 5px
-            border-radius 5px
-            padding 5px
-            width 30px
-            text-align center
-        #page_count
-            padding-right item-padding
-    ul#controls
-        padding-left 0px
-        margin 0px
-        list-style-type none
-        float right
-        padding-right page-margin
-        li
-            display inline-block
-            margin-right item-padding
-            font-size icon-size
-            a
+        #nav-left
+            float left
+            padding-left 0px
+            margin 0px
+            list-style-type none
+            li
+                display inline-block
+                margin-left item-padding
+            li:first-of-type
+                margin-left 0px
+            #prev, #next
+                font-size 3.5em
+                text-shadow 0 0 30px rgba(0,0,0,0.4)
+                position fixed
+                top 50vh
                 cursor pointer
+            #prev
+                left 50px
+            #next
+                right 50px
+            #view-contents, #first, #last, #favourite
+                vertical-align middle
+                font-size icon-size
+                cursor pointer
+            #page_num
+                background-color rgba(20, 20, 20, 0.5)
+                border 0px
+                -webkit-border-radius 5px
+                border-radius 5px
+                padding 5px
+                width 30px
+                text-align center
+        #nav-right
+            padding-left 0px
+            margin 0px
+            list-style-type none
+            float right
+            padding-right page-margin
+            li
+                display inline-block
+                margin-right item-padding
+                font-size icon-size
+                a
+                    cursor pointer
 
 
 aside#contents
@@ -241,9 +246,3 @@ footer
     div
         float right
         padding-right page-margin
-
-.tooltip
-    background-color #333 !important
-    border 0px !important
-    -webkit-border-radius 5px
-    border-radius 5px

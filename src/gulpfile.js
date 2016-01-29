@@ -15,15 +15,21 @@ gulp.task('normalize', function() {
 });
 
 gulp.task('stylus', function() {
-    gulp.src('css/source/main.styl')
-        .pipe(stylus({ compress: true }))
-        .pipe(gulp.dest('./css/'));
+    gulp.src([
+        'css/source/main.styl',
+        'bower_components/tether-tooltip/dist/css/tooltip-theme-arrows.css'
+    ]).pipe(stylus({ compress: true })).pipe(concat('main.css')).pipe(gulp.dest('./css/'));
+});
+
+gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
     gulp.src([
         'node_modules/pdfjs-dist/build/pdf.combined.js',
-        'node_modules/tooltip/dist/Tooltip.js',
+        'bower_components/tether/dist/js/tether.js',
+        'bower_components/tether-drop/dist/js/drop.js',
+        'bower_components/tether-tooltip/dist/js/tooltip.js',
         'bower_components/dragscroll/dragscroll.js',
         'js/source/annotations.js',
         'js/source/download.js',
@@ -34,7 +40,6 @@ gulp.task('js', function() {
         'js/source/view.js',
         'js/source/zoom.js',
         'js/source/render.js',
-        'js/source/tooltip.js',
     ]).pipe(concat('main.js')).pipe(gulp.dest('./js/'));
 });
 

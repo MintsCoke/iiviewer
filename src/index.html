@@ -19,23 +19,25 @@
         <header>
             <h1>Foobar</h1>
             <nav>
-                <a id="prev" class="fa fa-chevron-left"></a>
-                <a id="next" class="fa fa-chevron-right"></a>
-                <a id="view-contents" class="fa fa-columns" data-tooltip="Navigate" data-tooltip-positions="bottom"></a>
-                <a id="first" class="fa fa-chevron-circle-left" data-tooltip="First page" data-tooltip-positions="bottom"></a>
-                <input type="text" id="page_num"> / <span id="page_count"></span>
-                <a id="last" class="fa fa-chevron-circle-right" data-tooltip="Last page" data-tooltip-positions="bottom"></a>
-                <a id="favourite" class="fa fa-star-o" data-tooltip="Toggle favourite" data-tooltip-positions="bottom"></a>
+                <ul id="nav-left">
+                    <li><a id="prev" class="fa fa-chevron-left"></a></li>
+                    <li><a id="next" class="fa fa-chevron-right"></a></li>
+                    <li><a id="view-contents" class="fa fa-columns" data-tooltip="Navigate" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="first" class="fa fa-chevron-circle-left" data-tooltip="First page" data-tooltip-positions="bottom center"></a></li>
+                    <li><input type="text" id="page_num"> / <span id="page_count"></span></li>
+                    <li><a id="last" class="fa fa-chevron-circle-right" data-tooltip="Last page" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="favourite" class="fa fa-star-o" data-tooltip="Toggle favourite" data-tooltip-positions="bottom center"></a></li>
+                </ul>
+                <ul id="nav-right">
+                    <li><a id="view-single" class="fa fa-file-o" data-tooltip="Single page" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="view-double" class="fa fa-copy" data-tooltip="Double pgae" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="zoom-in" class="fa fa-plus-circle" data-tooltip="Zoom in" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="zoom-out" class="fa fa-minus-circle" data-tooltip="Zoom out" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="view-search" class="fa fa-search" data-tooltip="Search" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="view-download" class="fa fa-cloud-download" data-tooltip="Download centre" data-tooltip-positions="bottom center"></a></li>
+                    <li><a id="view-share" class="fa fa-share-alt" data-tooltip="Share" data-tooltip-positions="bottom center"></a></li>
+                </ul>
             </nav>
-            <ul id="controls">
-                <li><a id="view-single" class="fa fa-file-o" data-tooltip="Single page" data-tooltip-positions="bottom"></a></li>
-                <li><a id="view-double" class="fa fa-copy" data-tooltip="Double pgae" data-tooltip-positions="bottom"></a></li>
-                <li><a id="zoom-in" class="fa fa-plus-circle" data-tooltip="Zoom in" data-tooltip-positions="bottom"></a></li>
-                <li><a id="zoom-out" class="fa fa-minus-circle" data-tooltip="Zoom out" data-tooltip-positions="bottom"></a></li>
-                <li><a id="view-search" class="fa fa-search" data-tooltip="Search" data-tooltip-positions="bottom"></a></li>
-                <li><a id="view-download" class="fa fa-cloud-download" data-tooltip="Download centre" data-tooltip-positions="bottom"></a></li>
-                <li><a id="view-share" class="fa fa-share-alt" data-tooltip="Share" data-tooltip-positions="bottom"></a></li>
-            </ul>
         </header>
         <aside id="contents">
             <div id="contents-header">
