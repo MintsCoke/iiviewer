@@ -97,3 +97,12 @@ function toggleRightPanel(name) {
         }
     }
 }
+
+function onPagesClick() {
+    document.getElementById('search').style.display = 'none';
+    document.getElementById('download').style.display = 'none';
+    document.getElementById('share').style.display = 'none';
+    document.getElementById('contents').style.display = 'none';
+    isViewSearch = isViewDownload = isViewShare = isViewContents = false;
+}
+document.getElementById('pages').addEventListener('click', onPagesClick);
