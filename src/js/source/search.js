@@ -124,3 +124,12 @@ function onSearchPrev() {
     }
 }
 document.getElementById('search-prev').addEventListener('click', onSearchPrev);
+
+document.getElementById('search-query').onkeypress = function(event) {
+    if ( ! event) event = window.event;
+    var keyCode = event.keyCode || event.which;
+    var enterKeyCode = '13';
+    if (keyCode == enterKeyCode) {
+        onSearchFind();
+    }
+};
