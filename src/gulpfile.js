@@ -24,6 +24,7 @@ gulp.task('js', function() {
     gulp.src([
         'node_modules/pdfjs-dist/build/pdf.combined.js',
         'node_modules/tooltip/dist/Tooltip.js',
+        'bower_components/dragscroll/dragscroll.js',
         'js/source/custom.js',
     ]).pipe(concat('main.js')).pipe(gulp.dest('./js/'));
 });

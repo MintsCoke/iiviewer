@@ -1,0 +1,22 @@
+{
+  "name": "iiviewer",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Dion Moult <dion@thinkmoult.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Moult/iiviewer",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "dragscroll": "~0.0.5"
+  }
+}

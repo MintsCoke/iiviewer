@@ -7,3 +7,4 @@ src/pdf/1*.pdf
 src/css/*.css
 src/js/*.js
 src/node_modules
+src/bower_components
